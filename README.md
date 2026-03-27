@@ -28,11 +28,11 @@ TELEGRAM_BOT_TOKEN = ""
 
 Follow the instructions below to obtain all required API keys and credentials.
 
-### 1. MongoDB Database Password (DB_PASSWORD)
+1. MongoDB Database Password (DB_PASSWORD)
 
 This is your MongoDB user password (used in your connection string).
 
-### Steps:
+Steps:
 
 - Go to MongoDB: https://www.mongodb.com/
 - Sign in or create an account.
@@ -51,11 +51,11 @@ This is your MongoDB user password (used in your connection string).
 
 ---
 
-### 2. LangSmith API Key (LANGSMITH_API_KEY)
+2. LangSmith API Key (LANGSMITH_API_KEY)
 
 Used for tracing and debugging LangChain applications.
 
-### Steps:
+Steps:
 
 - Visit LangSmith: https://smith.langchain.com/
 - Sign in with your account.
@@ -65,11 +65,11 @@ Used for tracing and debugging LangChain applications.
 
 ---
 
-### 3. DeepSeek API Key (DEEPSEEK_API_KEY)
+3. DeepSeek API Key (DEEPSEEK_API_KEY)
 
 Used to power the AI model for your mentor agent.
 
-### Steps:
+Steps:
 
 - Go to DeepSeek: https://platform.deepseek.com/
 - Sign up or log in.
@@ -80,11 +80,11 @@ Used to power the AI model for your mentor agent.
 
 ---
 
-### 4. Telegram Bot Token (TELEGRAM_BOT_TOKEN)
+4. Telegram Bot Token (TELEGRAM_BOT_TOKEN)
 
 Required to connect your app to Telegram.
 
-### Steps:
+Steps:
 
 - Open Telegram
 - Search for **BotFather**
@@ -116,7 +116,7 @@ BotFather will return a token like:
 
 ---
 
-### ✅ Final `.env` Example
+✅ Final `.env` Example
 
 ```bash
 DB_PASSWORD="your_mongodb_password"
@@ -125,7 +125,7 @@ DEEPSEEK_API_KEY="your_deepseek_key"
 TELEGRAM_BOT_TOKEN="your_telegram_bot_token"
 ```
 
-2. Create and Activate a Virtual Environment
+## 2. Create and Activate a Virtual Environment
 
 It’s recommended to use a virtual environment to keep dependencies isolated.
 
@@ -143,13 +143,13 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-3. Install dependencies:
+## 3. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. modify MongoDB database URL
+## 4. modify MongoDB database URL
 
 Navigate to your mongoDB account.
 
@@ -166,7 +166,7 @@ Navigate back to your codes
 - Go to MONGO_URL and replace the sample url with your connection string
 - Detailed instructions are in mongodb_mentor.py
 
-5. Run the server:
+## 5. Run the server:
 
 ```bash
 python app.py
