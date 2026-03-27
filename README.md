@@ -59,8 +59,7 @@ Used for tracing and debugging LangChain applications.
 
 - Visit LangSmith: https://smith.langchain.com/
 - Sign in with your account.
-- Click your profile (top-right corner).
-- Go to **Settings → API Keys**
+- Go to **Settings (bottom left) → API Keys**
 - Click **Create API Key**
 - Copy the key and paste it into your `.env` file as `LANGSMITH_API_KEY`
 
