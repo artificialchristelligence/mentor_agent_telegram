@@ -191,7 +191,7 @@ All stored in the `mentor_journal` database:
 | ------ | ---- | ------------ |
 | GET    | /    | Health check |
 
-## Agent Tools
+## 6. Agent Tools
 
 The mentor agent has 13 tools:
 
@@ -210,7 +210,7 @@ The mentor agent has 13 tools:
 - get_weekly_summary — full week snapshot
 
 
-## 6. Hosting Server
+## 7. Hosting Server
 
 Once your mentor agent is working locally, you can deploy it so it runs continuously and can be accessed externally. Below are three hosting options with step-by-step instructions.
 
