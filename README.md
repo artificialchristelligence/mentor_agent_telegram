@@ -2,6 +2,9 @@
 
 A personal growth mentor powered by DeepSeek (or your choice) + LangChain, backed by MongoDB,served over Flask, and delivered via Telegram.
 
+Video Tutorial 
+https://youtu.be/qOPqg9lx6qo
+
 ## Project Structure
 
 ```
