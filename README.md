@@ -208,3 +208,198 @@ The mentor agent has 13 tools:
 - record_growth_milestone — log an achievement
 - get_growth_timeline — see progress over time
 - get_weekly_summary — full week snapshot
+
+
+## 6. Hosting Server
+
+Once your mentor agent is working locally, you can deploy it so it runs continuously and can be accessed externally. Below are three hosting options with step-by-step instructions.
+
+---
+
+### Option 1: Run on Local Machine (Development / Testing)
+
+This is the simplest way to run your server.
+
+#### Steps:
+
+1. **Start your virtual environment**
+```bash
+   source venv/bin/activate  # macOS/Linux
+   venv\Scripts\activate     # Windows
+```
+
+2. **Run the Flask server**
+```bash
+   python app.py
+```
+
+3. **Access locally**
+
+   Open browser: `http://127.0.0.1:5001`
+
+4. **Connect to Telegram**
+
+   This bot uses **polling** — it continuously checks Telegram for new messages. You only need your `TELEGRAM_BOT_TOKEN` set in your `.env` file. No webhook setup is required.
+
+**Pros:** Easy to set up, great for development  
+**Cons:** Must keep your computer running, not stable for production
+
+---
+
+### Option 2: Deploy on Azure Web App (Cloud Hosting)
+
+Best for scalability and reliability. All steps are done through the **Azure Portal** — no CLI required.
+
+#### Prerequisites:
+- An [Azure account](https://portal.azure.com)
+
+#### Steps:
+
+1. **Create a Resource Group**
+
+   - Go to [portal.azure.com](https://portal.azure.com)
+   - Search for **Resource Groups** → click **Create**
+   - Name it `mentor-agent-rg`, choose your region → click **Review + Create**
+
+2. **Create an App Service Plan**
+
+   - Search for **App Service Plans** → click **Create**
+   - Select your resource group `mentor-agent-rg`
+   - Choose **Linux** as the OS and **Basic B1** as the pricing tier
+
+3. **Create a Web App**
+
+   - Search for **App Services** → click **Create**
+   - Select your resource group and App Service Plan
+   - Set the runtime to **Python 3.11**
+   - Give your app a unique name (e.g., `mentor-agent-yourname`)
+
+4. **Set Environment Variables**
+
+   - Open your Web App → go to **Settings**
+   - Click **Environmental Variables** and add each of the following:
+
+     | Name | Value |
+     |---|---|
+     | `DB_PASSWORD` | `...` |
+     | `LANGSMITH_API_KEY` | `...` |
+     | `DEEPSEEK_API_KEY` | `...` |
+     | `TELEGRAM_BOT_TOKEN` | `...` |
+
+   - Click **Save**
+
+5. **Set the Startup Command**
+
+   - Still in **Configuration** → go to **General Settings**
+   - Set the startup command to:
+```
+     gunicorn --bind=0.0.0.0 --timeout 600 app:app
+```
+   - Click **Save**
+
+6. **Deploy Your Code**
+
+   - Go to **Deployment Center** inside your Web App
+   - Choose your source (e.g., **GitHub**, **Bitbucket**, or **Local Git**)
+   - Follow the prompts to connect your repository and deploy
+
+7. **Verify Telegram is Working**
+
+   Since the bot uses polling, once the app is running it will automatically start receiving Telegram messages — no webhook needed.
+
+**Pros:** Always online, scalable, production-ready  
+**Cons:** Slight cost after free tier
+
+---
+
+### Option 3: Run on Raspberry Pi (Self-Hosted)
+
+Great for personal projects and learning infrastructure.
+
+#### Prerequisites:
+- Raspberry Pi (preferably 4)
+- Raspberry Pi OS installed
+- Internet connection
+
+#### Steps:
+
+1. **Update system**
+```bash
+   sudo apt update && sudo apt upgrade -y
+```
+
+2. **Install Python & Git**
+```bash
+   sudo apt install python3 python3-venv python3-pip git -y
+```
+
+3. **Clone your project**
+```bash
+   git clone <your-repo-url>
+   cd mentor_agent
+```
+
+4. **Set up virtual environment**
+```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+```
+
+5. **Add `.env` file**
+```bash
+   nano .env
+```
+
+6. **Run server**
+```bash
+   python app.py
+```
+
+7. **Make it persistent (systemd service)**
+
+   Create the service file:
+```bash
+   sudo nano /etc/systemd/system/mentor-agent.service
+```
+
+   Paste the following:
+```ini
+   [Unit]
+   Description=Mentor Agent Flask App
+   After=network.target
+
+   [Service]
+   User=pi
+   WorkingDirectory=/home/pi/mentor_agent
+   ExecStart=/home/pi/mentor_agent/venv/bin/python app.py
+   Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+```
+
+   Enable the service:
+```bash
+   sudo systemctl daemon-reexec
+   sudo systemctl daemon-reload
+   sudo systemctl enable mentor-agent
+   sudo systemctl start mentor-agent
+```
+
+8. **Telegram Connection**
+
+   The bot uses polling, so once the app is running, it will automatically connect to Telegram using your `TELEGRAM_BOT_TOKEN`. No additional setup needed.
+
+**Pros:** Low cost (one-time hardware), full control  
+**Cons:** Requires networking setup, less reliable than cloud
+
+---
+
+### Summary
+
+| Option         | Best For         | Difficulty | Cost        |
+|----------------|------------------|------------|-------------|
+| Local Machine  | Development      | Easy       | Free        |
+| Azure Web App  | Production       | Medium     | $$          |
+| Raspberry Pi   | Personal Hosting | Medium     | One-time    |
