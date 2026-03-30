@@ -1,0 +1,4 @@
+name:     minute_motivation
+schedule: interval 100m
+prompt:   Any word of wisdom for me?
+chat_id:  6632630195
