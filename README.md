@@ -6,7 +6,9 @@ A personal growth mentor powered by DeepSeek (or your choice) + LangChain, backe
 ### Update
 
 2026/3/30
+
 Added proactive scheduled message pushing - check knock_manual.md for details.
+
 ---
 
 Video Tutorial 
