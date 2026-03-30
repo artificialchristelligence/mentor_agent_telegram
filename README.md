@@ -2,6 +2,13 @@
 
 A personal growth mentor powered by DeepSeek (or your choice) + LangChain, backed by MongoDB,served over Flask, and delivered via Telegram.
 
+---
+Update
+
+###2026/3/30
+Added proactive scheduled message pushing - check knock_manual.md for details.
+---
+
 Video Tutorial 
 https://youtu.be/qOPqg9lx6qo
 
