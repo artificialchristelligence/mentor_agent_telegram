@@ -22,7 +22,10 @@ mentor_agent/
 ├── mentor_agent.py     # LangChain agent, tools, DeepSeek model
 ├── mongodb_mentor.py   # MongoDB helpers (reflections, incidents, reminders, growth)
 ├── requirements.txt
+├── knock.txt           # Scheduled jobs
+├── knock_manual.md     # Instructions on scheduled jobs
 └── .env                # secrets (never commit this)
+
 ```
 
 ## Installation
