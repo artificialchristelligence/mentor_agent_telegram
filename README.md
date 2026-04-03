@@ -1,6 +1,15 @@
 # Mentor Agent
 
-A personal growth mentor powered by DeepSeek (or your choice) + LangChain, backed by MongoDB,served over Flask, and delivered via Telegram.
+A personal growth mentor powered by DeepSeek (or your choice) + LangChain, backed by MongoDB, served over Flask, and delivered via Telegram.
+
+---
+### Update
+
+2026/3/30
+
+Added proactive scheduled message pushing - check knock_manual.md for details.
+
+---
 
 Video Tutorial 
 https://youtu.be/qOPqg9lx6qo
@@ -13,7 +22,10 @@ mentor_agent/
 ├── mentor_agent.py     # LangChain agent, tools, DeepSeek model
 ├── mongodb_mentor.py   # MongoDB helpers (reflections, incidents, reminders, growth)
 ├── requirements.txt
+├── knock.txt           # Scheduled jobs
+├── knock_manual.md     # Instructions on scheduled jobs
 └── .env                # secrets (never commit this)
+
 ```
 
 ## Installation
@@ -190,7 +202,7 @@ Server starts on port 5001.
 
 ## MongoDB Collections
 
-All stored in the `mentor_journal` database:
+All stored in the `journals` database:
 
 | Collection  | Purpose                                      |
 | ----------- | -------------------------------------------- |
@@ -350,7 +362,7 @@ Great for personal projects and learning infrastructure.
 3. **Clone your project**
 ```bash
    git clone <your-repo-url>
-   cd mentor_agent
+   cd mentor_agent_telegram
 ```
 
 4. **Set up virtual environment**
@@ -374,7 +386,7 @@ Great for personal projects and learning infrastructure.
 
    Create the service file:
 ```bash
-   sudo nano /etc/systemd/system/mentor-agent.service
+   sudo nano /etc/systemd/system/mentor-agent_telegram.service
 ```
 
    Paste the following:
@@ -385,8 +397,8 @@ Great for personal projects and learning infrastructure.
 
    [Service]
    User=pi
-   WorkingDirectory=/home/pi/mentor_agent
-   ExecStart=/home/pi/mentor_agent/venv/bin/python app.py
+   WorkingDirectory=/home/pi/mentor_agent_telegram
+   ExecStart=/home/pi/mentor_agent_telegram/venv/bin/python app.py
    Restart=always
 
    [Install]
@@ -397,8 +409,8 @@ Great for personal projects and learning infrastructure.
 ```bash
    sudo systemctl daemon-reexec
    sudo systemctl daemon-reload
-   sudo systemctl enable mentor-agent
-   sudo systemctl start mentor-agent
+   sudo systemctl enable mentor-agent=telegram
+   sudo systemctl start mentor-agent-telegram
 ```
 
 8. **Telegram Connection**
