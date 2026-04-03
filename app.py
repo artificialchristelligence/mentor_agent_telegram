@@ -219,8 +219,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_text = update.message.text
     try:
-        #response = get_response_from_agent(user_text)
-        response = await asyncio.wait_for(
+        response = "hello" #get_response_from_agent(user_text)
+        #response = await asyncio.wait_for(
             asyncio.to_thread(get_response_from_agent, user_text),
             timeout=180  # 3 minutes, well above your agent's normal 30 seconds
         )
