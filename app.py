@@ -220,7 +220,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     user_text = update.message.text
     try:
         #response = get_response_from_agent(user_text)
-        response = "Hello! I'm your mentor agent. How can I help you?"
+        response = await asyncio.wait_for(
+            asyncio.to_thread(get_response_from_agent, user_text),
+            timeout=180  # 3 minutes, well above your agent's normal 30 seconds
+        )
     except Exception:
         response = "Testing..."
     await update.message.reply_text(response)
