@@ -1,4 +1,4 @@
 name:     minute_motivation
-schedule: interval 100m
-prompt:   Any word of wisdom for me?
+schedule: cron 0 9 * * *
+prompt:   It is time to work now. Please give me some words of encouragement according to what I have been through
 chat_id:  6632630195
