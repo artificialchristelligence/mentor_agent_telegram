@@ -219,7 +219,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_text = update.message.text
     try:
-        response = get_response_from_agent(user_text)
+        #response = get_response_from_agent(user_text)
+        response = "Hello! I'm your mentor agent. How can I help you?"
     except Exception:
         response = "Testing..."
     await update.message.reply_text(response)
